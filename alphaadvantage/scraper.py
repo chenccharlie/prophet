@@ -1,4 +1,4 @@
-from constants import *
+from alphavantage.constants import *
 
 import configs
 import requests
@@ -17,7 +17,7 @@ def _build_configs(symbol, function):
     config = {
         SYMBOL: symbol,
         FUNCTION: function,
-        API_KEY: configs.API_KEY,
+        API_KEY: configs.ALPHA_VANTAGE_API_KEY,
     }
     config.update(FUNCTION_CONFIGS[function])
     return config
