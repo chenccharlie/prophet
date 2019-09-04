@@ -14,20 +14,25 @@ FUNCTION_CONFIGS = {
 
 
 def _build_configs(symbol, function):
-    return {
+    config = {
         SYMBOL: symbol,
         FUNCTION: function,
         API_KEY: configs.API_KEY,
-    } + FUNCTION_CONFIGS[function]
+    }
+    config.update(FUNCTION_CONFIGS[function])
+    return config
 
 
 def _build_url(config):
-    return BASE_URL + [key + '=' + value for key, value in config].join('&')
+    url = BASE_URL + '&'.join([key + '=' + config[key] for key in config])
+    print "url", url
+    return url
 
 
-def __main__():
+if __name__ == "__main__":
     for symbol in SYMBOLS:
-        for function in functions:
+        for function in FUNCTIONS:
+            print "process", symbol, function
             config = _build_configs(symbol, function)
             url = _build_url(config)
             response = requests.get(url)
