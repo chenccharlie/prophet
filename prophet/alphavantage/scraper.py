@@ -16,7 +16,7 @@ class Scraper:
         config = self._build_configs(symbol, function)
         url = self._build_url(config)
         response = requests.get(url)
-        parsed_data = function.parse_data(response)
+        parsed_data = function.parse_data(response.json())
         return parsed_data
 
   def _build_configs(self, symbol, function):
