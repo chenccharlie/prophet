@@ -26,7 +26,7 @@ class TimeSeriesDaily(Function):
       daily_results["close"][date] = daily_data[date]["4. close"]
       daily_results["volume"][date] = daily_data[date]["5. volume"]
 
-    dates.push_back(date)
+    dates.append(date)
     return {
       "dates": dates,
       "last_refresh": last_refresh,
