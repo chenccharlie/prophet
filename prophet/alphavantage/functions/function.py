@@ -1,17 +1,17 @@
 class Function:
-  def get_name():
+  def get_name(self):
     """
     Return function name used to pass in the query url
     """
     raise NotImplementedError
 
-  def get_configs():
+  def get_configs(self):
     """
     Return a dict with additional function specific param names and values
     """
     raise NotImplementedError
 
-  def parse_data(json_data):
+  def parse_data(self, json_data):
     """
     Return a dict with following format:
     {

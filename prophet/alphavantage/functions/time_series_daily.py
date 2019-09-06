@@ -3,13 +3,13 @@ import json
 from function import Function
 
 class TimeSeriesDaily(Function):
-  def get_name():
+  def get_name(self):
     return "TIME_SERIES_DAILY"
 
-  def get_configs():
+  def get_configs(self):
     return {}
 
-  def parse_data(json_data):
+  def parse_data(self, json_data):
     data = json.load(json_data)
     last_refresh = data["Meta Data"]["3. Last Refreshed"]
     daily_data = data["Time Series (Daily)"]
