@@ -10,7 +10,7 @@ FUNCTIONS = [TimeSeriesDaily()]
 
 
 class Scraper:
-  def scrape():
+  def scrape(self):
     for symbol in SYMBOLS:
       for function in FUNCTIONS:
         config = self._build_configs(symbol, function)

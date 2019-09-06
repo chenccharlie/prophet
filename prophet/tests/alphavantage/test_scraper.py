@@ -1,6 +1,6 @@
 import unittest
 
-from alphavantage.scraper import Scraper
+from prophet.alphavantage.scraper import Scraper
 
 class TestScraper(unittest.TestCase):
   def setUp(self):
