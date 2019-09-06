@@ -1,7 +1,7 @@
-from alphavantage.constants import *
-
-import configs
 import requests
+
+from configs import *
+from constants import *
 
 
 SYMBOLS = ['MSFT']
@@ -17,7 +17,7 @@ def _build_configs(symbol, function):
     config = {
         SYMBOL: symbol,
         FUNCTION: function,
-        API_KEY: configs.ALPHA_VANTAGE_API_KEY,
+        API_KEY: ALPHA_VANTAGE_API_KEY,
     }
     config.update(FUNCTION_CONFIGS[function])
     return config
@@ -25,15 +25,14 @@ def _build_configs(symbol, function):
 
 def _build_url(config):
     url = BASE_URL + '&'.join([key + '=' + config[key] for key in config])
-    print "url", url
     return url
 
 
-if __name__ == "__main__":
+def scrape():
     for symbol in SYMBOLS:
         for function in FUNCTIONS:
-            print "process", symbol, function
             config = _build_configs(symbol, function)
             url = _build_url(config)
             response = requests.get(url)
-            print response.json()
+
+scrape()
