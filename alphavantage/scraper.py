@@ -2,32 +2,30 @@ import requests
 
 from configs import *
 from constants import *
+from functions.time_series_daily import TimeSeriesDaily
 
 
 SYMBOLS = ['MSFT']
-FUNCTIONS = ['TIME_SERIES_INTRADAY']
-FUNCTION_CONFIGS = {
-  'TIME_SERIES_INTRADAY': {
-    INTERVAL: '5min',
-  }
-}
+FUNCTIONS = [TimeSeriesDaily()]
 
 
-class Scraper():
+class Scraper:
   def scrape():
     for symbol in SYMBOLS:
       for function in FUNCTIONS:
         config = self._build_configs(symbol, function)
         url = self._build_url(config)
         response = requests.get(url)
+        parsed_data = function.parse_data(response)
+        return parsed_data
 
   def _build_configs(self, symbol, function):
     config = {
       SYMBOL: symbol,
-      FUNCTION: function,
+      FUNCTION: function.get_name(),
       API_KEY: ALPHA_VANTAGE_API_KEY,
     }
-    config.update(FUNCTION_CONFIGS[function])
+    config.update(function.get_configs())
     return config
 
   def _build_url(self, config):
