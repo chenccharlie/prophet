@@ -16,8 +16,8 @@ class Scraper:
       url = self._build_url(config)
       response = requests.get(url)
       parsed_data = function.parse_data(response.json())
-      dates.union(parse_data.dates)
-      data.update(parse_data.data)
+      dates.union(parsed_data.dates)
+      data.update(parsed_data.data)
     dates = list(dates)
     dates.sort(reverse=True)
     return {
