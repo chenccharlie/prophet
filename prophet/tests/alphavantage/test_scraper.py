@@ -7,7 +7,7 @@ class TestScraper(unittest.TestCase):
     self.scraper = Scraper()
 
   def test_scrape(self):
-      self.assertEqual(self.scraper.scrape(), 'FOO')
+      self.assertEqual(self.scraper.scrape("MSFT"), 'FOO')
 
 if __name__ == '__main__':
     unittest.main()

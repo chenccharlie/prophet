@@ -4,20 +4,26 @@ from configs import *
 from constants import *
 from functions.time_series_daily import TimeSeriesDaily
 
-
-SYMBOLS = ['MSFT']
 FUNCTIONS = [TimeSeriesDaily()]
 
 
 class Scraper:
-  def scrape(self):
-    for symbol in SYMBOLS:
-      for function in FUNCTIONS:
-        config = self._build_configs(symbol, function)
-        url = self._build_url(config)
-        response = requests.get(url)
-        parsed_data = function.parse_data(response.json())
-        return parsed_data
+  def scrape(self, symbol):
+    dates = set([])
+    data = {}
+    for function in FUNCTIONS:
+      config = self._build_configs(symbol, function)
+      url = self._build_url(config)
+      response = requests.get(url)
+      parsed_data = function.parse_data(response.json())
+      dates.union(parse_data.dates)
+      data.update(parse_data.data)
+    dates = list(dates)
+    dates.sort(reverse=True)
+    return {
+      "dates": dates,
+      "data": data
+    }
 
   def _build_configs(self, symbol, function):
     config = {

@@ -8,7 +8,6 @@ class TimeSeriesDaily(Function):
     return {}
 
   def parse_data(self, data):
-    last_refresh = data["Meta Data"]["3. Last Refreshed"]
     daily_data = data["Time Series (Daily)"]
     daily_results = {
       "open": {},
@@ -27,8 +26,9 @@ class TimeSeriesDaily(Function):
       daily_results["volume"][date] = daily_data[date]["5. volume"]
       dates.append(date)
 
+    dates.sort(reverse=True)
+
     return {
       "dates": dates,
-      "last_refresh": last_refresh,
       "data": daily_results
     }

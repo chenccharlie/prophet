@@ -15,7 +15,12 @@ class Function:
     """
     Return a dict with following format:
     {
-      "last_refresh": "2019-09-05",
+      "dates": [
+        "2019-09-05",
+        "2019-09-04",
+        "2019-09-03",
+        ...
+      ],
       "data": {
         "title1": {
           "2019-09-05": "value",
