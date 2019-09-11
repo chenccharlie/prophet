@@ -11,12 +11,20 @@ class TestScraper(unittest.TestCase):
     "volume",
   ]
 
+  SYMBOL = "MSFT"
+  FUNCTIONS = [TimeSeriesDaily(),]
+
   def setUp(self):
     self.scraper = Scraper()
 
   def test_scrape(self):
     self.assertEqual(
-      set(self.scraper.scrape("MSFT")["data"].keys()),
+      set(
+        self.scraper.scrape(
+          TestScraper.SYMBOL,
+          TestScraper.FUNCTIONS,
+        )["data"].keys(),
+      ),
       set(TestScraper.LABELS),
     )
 

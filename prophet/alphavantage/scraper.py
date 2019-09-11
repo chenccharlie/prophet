@@ -4,14 +4,12 @@ from configs import *
 from constants import *
 from functions.time_series_daily import TimeSeriesDaily
 
-FUNCTIONS = [TimeSeriesDaily()]
-
 
 class Scraper:
-  def scrape(self, symbol):
+  def scrape(self, symbol, functions):
     dates = set([])
     data = {}
-    for function in FUNCTIONS:
+    for function in functions:
       config = self._build_configs(symbol, function)
       url = self._build_url(config)
       response = requests.get(url)
