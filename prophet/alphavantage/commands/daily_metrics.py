@@ -13,9 +13,9 @@ class DailyMetrics(BaseCommand):
     TimeSeriesDaily(),
   ]
 
-  def get_schedule(self):
-    return schedule.every().minute
-    # return schedule.every().day.at("18:00")
+  def get_schedule(self, scheduler):
+    return scheduler.every().minute
+    # return scheduler.every().day.at("18:00")
 
   def get_runnable(self):
     def run():
