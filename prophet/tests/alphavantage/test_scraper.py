@@ -3,7 +3,7 @@ import unittest
 from prophet.alphavantage.scraper import Scraper
 
 class TestScraper(unittest.TestCase):
-  LABELS = [
+  self.LABELS = [
     "open",
     "high",
     "low",
@@ -15,7 +15,7 @@ class TestScraper(unittest.TestCase):
     self.scraper = Scraper()
 
   def test_scrape(self):
-      self.assertEqual(self.scraper.scrape("MSFT")["data"].keys(), LABELS)
+      self.assertEqual(self.scraper.scrape("MSFT")["data"].keys(), self.LABELS)
 
 if __name__ == '__main__':
     unittest.main()
