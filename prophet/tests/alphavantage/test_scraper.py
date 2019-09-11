@@ -16,8 +16,8 @@ class TestScraper(unittest.TestCase):
 
   def test_scrape(self):
     self.assertEqual(
-      self.scraper.scrape("MSFT")["data"].keys(),
-      TestScraper.LABELS,
+      set(self.scraper.scrape("MSFT")["data"].keys()),
+      set(TestScraper.LABELS),
     )
 
 if __name__ == '__main__':
