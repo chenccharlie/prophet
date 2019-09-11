@@ -14,11 +14,14 @@ class DailyMetrics(BaseCommand):
   ]
 
   def get_schedule(self, scheduler):
+    print "schedule"
     return scheduler.every().minute
     # return scheduler.every().day.at("18:00")
 
   def get_runnable(self):
+    print "get_run"
     def run():
+      print "start"
       for symbol in DailyMetrics.SYMBOLS:
         scrape_result = self.scraper.scrape(symbol, DailyMetrics.FUNCTIONS)
         dates = scrape_result["dates"]
@@ -33,5 +36,6 @@ class DailyMetrics(BaseCommand):
             )
         file.flush()
         file.close()
-
+      print "end"
+    print "return run"
     return run
