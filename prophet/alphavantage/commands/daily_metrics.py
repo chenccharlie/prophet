@@ -12,10 +12,11 @@ class DailyMetrics(BaseCommand):
   FUNCTIONS = [
     TimeSeriesDaily(),
   ]
+  BASE_DIR = '/home/ccehshmily/github/prophet/prophet/alphavantage/data/daily_metrics'
 
   def get_schedule(self, scheduler):
     print "schedule"
-    return scheduler.every().minute
+    return scheduler.every(5).seconds
     # return scheduler.every().day.at("18:00")
 
   def get_runnable(self):
@@ -27,15 +28,13 @@ class DailyMetrics(BaseCommand):
         dates = scrape_result["dates"]
         data = scrape_result["data"]
         labels = list(data.keys())
-        with open('../data/daily_metrics/{}'.format(symbol), 'w') as file:
-          file.write("date,{}\n".format(labels.join(",")))
+        with open('{}/{}.txt'.format(DailyMetrics.BASE_DIR, symbol), 'w+') as file:
+          file.write("date,{}\n".format(",".join(labels)))
           for date in dates:
             file.write("{},{}\n".format(
               date,
-              [data[label][date] for label in labels].join(",")),
+              ",".join([data[label][date] for label in labels])),
             )
-        file.flush()
-        file.close()
       print "end"
     print "return run"
     return run
