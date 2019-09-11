@@ -7,7 +7,12 @@ scheduler = schedule.Scheduler()
 
 daily_metrics_command = DailyMetrics()
 
-daily_metrics_command.get_schedule(scheduler).do(daily_metrics_command.get_runnable())
+def run_job():
+  print "start run"
+  runnable = daily_metrics_command.get_runnable()
+  runnable()
+
+daily_metrics_command.get_schedule(scheduler).do(run_job)
 
 while True:
     scheduler.run_pending()
