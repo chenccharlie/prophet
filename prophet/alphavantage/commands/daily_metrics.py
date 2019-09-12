@@ -27,12 +27,20 @@ class DailyMetrics(BaseCommand):
         dates = scrape_result["dates"]
         data = scrape_result["data"]
         labels = list(data.keys())
+        start_index = -1
         with open(
           '{}/{}.txt'.format(DailyMetrics.BASE_DIR, symbol),
-          'w+',
+          'r+',
+        ) as file:
+          last_recorded_date = file.readlines()[-1].split(",")[0]
+          start_index = dates.index(last_recorded_date) + 1
+
+        with open(
+          '{}/{}.txt'.format(DailyMetrics.BASE_DIR, symbol),
+          'a+',
         ) as file:
           file.write("date,{}\n".format(",".join(labels)))
-          for date in dates:
+          for date in dates[start_index:]:
             file.write("{},{}\n".format(
               date,
               ",".join([data[label][date] for label in labels])),
