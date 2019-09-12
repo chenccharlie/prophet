@@ -1,4 +1,7 @@
+import os.path
 import schedule
+
+from os import path
 
 from prophet.alphavantage.commands.base_command import BaseCommand
 from prophet.alphavantage.functions.time_series_daily import TimeSeriesDaily
@@ -28,18 +31,20 @@ class DailyMetrics(BaseCommand):
         data = scrape_result["data"]
         labels = list(data.keys())
         start_index = 0
-        with open(
-          '{}/{}.txt'.format(DailyMetrics.BASE_DIR, symbol),
-          'w+',
-        ) as file:
-          pass
+
+        if not path.exists('{}/{}.txt'.format(DailyMetrics.BASE_DIR, symbol)):
+          with open(
+            '{}/{}.txt'.format(DailyMetrics.BASE_DIR, symbol),
+            'w+',
+          ) as file:
+            file.write("date,{}\n".format(",".join(labels)))
 
         with open(
           '{}/{}.txt'.format(DailyMetrics.BASE_DIR, symbol),
-          'r+',
+          'r',
         ) as file:
           lines = file.readlines()
-          if len(lines) > 0:
+          if len(lines) > 1:
             last_recorded_date = lines[-1].split(",")[0]
             start_index = dates.index(last_recorded_date) + 1
 
@@ -47,7 +52,6 @@ class DailyMetrics(BaseCommand):
           '{}/{}.txt'.format(DailyMetrics.BASE_DIR, symbol),
           'a+',
         ) as file:
-          file.write("date,{}\n".format(",".join(labels)))
           for date in dates[start_index:]:
             file.write("{},{}\n".format(
               date,
