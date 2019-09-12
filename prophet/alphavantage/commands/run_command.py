@@ -12,6 +12,7 @@ scheduler = schedule.Scheduler()
 command = COMMANDS[sys.argv[1]]
 
 def run_job():
+  print "Start running:", sys.argv[1]
   runnable = command.get_runnable()
   runnable()
   print "Finished running:", sys.argv[1]

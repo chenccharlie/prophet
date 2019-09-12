@@ -1,4 +1,5 @@
 import requests
+import time
 
 from configs import *
 from constants import *
@@ -10,12 +11,16 @@ class Scraper:
     dates = set([])
     data = {}
     for function in functions:
+      print "Scrape {} for {}".format(function.get_name(), symbol)
       config = self._build_configs(symbol, function)
       url = self._build_url(config)
       response = requests.get(url)
       parsed_data = function.parse_data(response.json())
       dates.update(set(parsed_data["dates"]))
       data.update(parsed_data["data"])
+      print "Rate limit: sleep 10 seconds..."
+      time.sleep(10 * 1000)
+
     dates = list(dates)
     dates.sort()
     return {
