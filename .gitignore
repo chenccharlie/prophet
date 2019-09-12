@@ -1,2 +1,3 @@
 **/*.pyc
-configs.py
+prophet/alphavantage/configs.py
+prophet/alphavantage/data/*
