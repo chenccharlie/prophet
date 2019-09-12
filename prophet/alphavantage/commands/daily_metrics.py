@@ -20,8 +20,8 @@ class DailyMetrics(BaseCommand):
   )
 
   def get_schedule(self, scheduler):
-    return scheduler.every(5).seconds
-    # return scheduler.every().day.at("18:00")
+    print "Scheduled daily_metrics at 18:00 every day."
+    return scheduler.every().day.at("18:00")
 
   def get_runnable(self):
     def run():
