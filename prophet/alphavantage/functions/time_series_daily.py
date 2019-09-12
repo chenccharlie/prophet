@@ -26,7 +26,7 @@ class TimeSeriesDaily(Function):
       daily_results["volume"][date] = daily_data[date]["5. volume"]
       dates.append(date)
 
-    dates.sort(reverse=True)
+    dates.sort()
 
     return {
       "dates": dates,

@@ -14,6 +14,7 @@ command = COMMANDS[sys.argv[1]]
 def run_job():
   runnable = command.get_runnable()
   runnable()
+  print "Finished running:", sys.argv[1]
 
 command.get_schedule(scheduler).do(run_job)
 

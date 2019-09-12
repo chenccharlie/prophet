@@ -17,7 +17,7 @@ class Scraper:
       dates.update(set(parsed_data["dates"]))
       data.update(parsed_data["data"])
     dates = list(dates)
-    dates.sort(reverse=True)
+    dates.sort()
     return {
       "dates": dates,
       "data": data
