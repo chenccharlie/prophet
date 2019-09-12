@@ -1,18 +1,21 @@
 import schedule
+import sys
 import time
 
 from prophet.alphavantage.commands.daily_metrics import DailyMetrics
 
-scheduler = schedule.Scheduler()
+COMMANDS = {
+  "daily_metrics": DailyMetrics(),
+}
 
-daily_metrics_command = DailyMetrics()
+scheduler = schedule.Scheduler()
+command = COMMANDS[sys.argv[1]]
 
 def run_job():
-  print "start run"
-  runnable = daily_metrics_command.get_runnable()
+  runnable = command.get_runnable()
   runnable()
 
-daily_metrics_command.get_schedule(scheduler).do(run_job)
+command.get_schedule(scheduler).do(run_job)
 
 while True:
     scheduler.run_pending()
