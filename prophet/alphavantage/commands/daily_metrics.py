@@ -21,9 +21,9 @@ class DailyMetrics(BaseCommand):
 
   def get_runnable(self):
     def run():
-      symbols_file = open(ALPHAVANTAGE_DIR + '/symbols.txt', 'r')
+      symbols_file = open(DailyMetrics.ALPHAVANTAGE_DIR + '/symbols.txt', 'r')
       symbols = [
-        symbol[:-1] if symbol != ""
+        symbol[:-1]
         for symbol in symbols_file.readlines()
       ]
       for symbol in symbols:

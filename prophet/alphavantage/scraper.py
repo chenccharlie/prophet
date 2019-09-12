@@ -19,7 +19,7 @@ class Scraper:
       dates.update(set(parsed_data["dates"]))
       data.update(parsed_data["data"])
       print "Rate limit: sleep 10 seconds..."
-      time.sleep(10 * 1000)
+      time.sleep(10)
 
     dates = list(dates)
     dates.sort()
