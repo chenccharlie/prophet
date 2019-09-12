@@ -9,15 +9,11 @@ from prophet.alphavantage.scraper import Scraper
 
 
 class DailyMetrics(BaseCommand):
-  SYMBOLS = [
-    "MSFT",
-  ]
   FUNCTIONS = [
     TimeSeriesDaily(),
   ]
-  BASE_DIR = (
-    '/home/ccehshmily/github/prophet/prophet/alphavantage/data/daily_metrics'
-  )
+  ALPHAVANTAGE_DIR = '/home/ccehshmily/github/prophet/prophet/alphavantage'
+  BASE_DIR = ALPHAVANTAGE_DIR + '/data/daily_metrics'
 
   def get_schedule(self, scheduler):
     print "Scheduled daily_metrics at 18:00 every day."
@@ -25,7 +21,12 @@ class DailyMetrics(BaseCommand):
 
   def get_runnable(self):
     def run():
-      for symbol in DailyMetrics.SYMBOLS:
+      symbols_file = open(ALPHAVANTAGE_DIR + '/symbols.txt', 'r')
+      symbols = [
+        symbol[:-1] if symbol != ""
+        for symbol in symbols_file.readlines()
+      ]
+      for symbol in symbols:
         scrape_result = self.scraper.scrape(symbol, DailyMetrics.FUNCTIONS)
         dates = scrape_result["dates"]
         data = scrape_result["data"]
