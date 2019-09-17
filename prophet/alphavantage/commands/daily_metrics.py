@@ -60,8 +60,15 @@ class DailyMetrics(BaseCommand):
           'a+',
         ) as file:
           for date in dates[start_index:]:
-            file.write("{},{}\n".format(
-              date,
-              ",".join([data[label][date] for label in labels])),
-            )
+            skipped_dates = []
+            try:
+              file.write("{},{}\n".format(
+                date,
+                ",".join([data[label][date] for label in labels])),
+              )
+            except KeyError:
+              # Skip writing the date when not all values can be found
+              skipped_dates.append(date)
+        print("Finished daily_metrics run for {}, skipped dates: {}".format(
+          symbol, skipped_dates))
     return run
