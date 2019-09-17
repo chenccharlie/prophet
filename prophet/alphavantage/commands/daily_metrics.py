@@ -4,6 +4,9 @@ import schedule
 from os import path
 
 from prophet.alphavantage.commands.base_command import BaseCommand
+from prophet.alphavantage.functions.ema_10_daily import EMA10Daily
+from prophet.alphavantage.functions.macd_daily import MACDDaily
+from prophet.alphavantage.functions.sma_10_daily import SMA10Daily
 from prophet.alphavantage.functions.time_series_daily import TimeSeriesDaily
 from prophet.alphavantage.scraper import Scraper
 
@@ -11,6 +14,9 @@ from prophet.alphavantage.scraper import Scraper
 class DailyMetrics(BaseCommand):
   FUNCTIONS = [
     TimeSeriesDaily(),
+    SMA10Daily(),
+    EMA10Daily(),
+    MACDDaily(),
   ]
   ALPHAVANTAGE_DIR = '/home/ccehshmily/github/prophet/prophet/alphavantage'
   BASE_DIR = ALPHAVANTAGE_DIR + '/data/daily_metrics'

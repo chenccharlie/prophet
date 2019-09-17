@@ -4,6 +4,9 @@ class TimeSeriesDaily(Function):
   def get_name(self):
     return "TIME_SERIES_DAILY"
 
+  def get_function_name(self):
+    return self.get_name()
+
   def get_configs(self):
     return {}
 

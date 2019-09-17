@@ -31,7 +31,7 @@ class Scraper:
   def _build_configs(self, symbol, function):
     config = {
       SYMBOL: symbol,
-      FUNCTION: function.get_name(),
+      FUNCTION: function.get_function_name(),
       API_KEY: ALPHA_VANTAGE_API_KEY,
     }
     config.update(function.get_configs())
