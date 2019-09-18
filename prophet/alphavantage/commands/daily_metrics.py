@@ -4,19 +4,38 @@ import schedule
 from os import path
 
 from prophet.alphavantage.commands.base_command import BaseCommand
+from prophet.alphavantage.functions.ad_daily import ADDaily
+from prophet.alphavantage.functions.adx_10_daily import ADX10Daily
+from prophet.alphavantage.functions.aroon_10_daily import AROON10Daily
+from prophet.alphavantage.functions.bbands_5_daily import BBANDS5Daily
+from prophet.alphavantage.functions.cci_10_daily import CCI10Daily
 from prophet.alphavantage.functions.ema_10_daily import EMA10Daily
 from prophet.alphavantage.functions.macd_daily import MACDDaily
+from prophet.alphavantage.functions.obv_daily import OBVDaily
+from prophet.alphavantage.functions.rsi_10_daily import RSI10Daily
 from prophet.alphavantage.functions.sma_10_daily import SMA10Daily
+from prophet.alphavantage.functions.stoch_daily import STOCHDaily
+
 from prophet.alphavantage.functions.time_series_daily import TimeSeriesDaily
+
 from prophet.alphavantage.scraper import Scraper
 
 
 class DailyMetrics(BaseCommand):
   FUNCTIONS = [
     TimeSeriesDaily(),
-    SMA10Daily(),
+    ADDaily(),
+    ADX10Daily(),
+    AROON10Daily(),
+    BBANDS5Daily(),
+    CCI10Daily(),
+    EMA10Daily(),
     EMA10Daily(),
     MACDDaily(),
+    OBVDaily(),
+    RSI10Daily(),
+    SMA10Daily(),
+    STOCHDaily(),
   ]
   ALPHAVANTAGE_DIR = '/home/ccehshmily/github/prophet/prophet/alphavantage'
   BASE_DIR = ALPHAVANTAGE_DIR + '/data/daily_metrics'
