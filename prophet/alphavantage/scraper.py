@@ -18,8 +18,8 @@ class Scraper:
       parsed_data = function.parse_data(response.json())
       dates.update(set(parsed_data["dates"]))
       data.update(parsed_data["data"])
-      print "Rate limit: sleep 10 seconds..."
-      time.sleep(10)
+      print "Rate limit: sleep 15 seconds..."
+      time.sleep(15)
 
     dates = list(dates)
     dates.sort()
