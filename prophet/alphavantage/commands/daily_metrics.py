@@ -30,7 +30,6 @@ class DailyMetrics(BaseCommand):
     BBANDS5Daily(),
     CCI10Daily(),
     EMA10Daily(),
-    EMA10Daily(),
     MACDDaily(),
     OBVDaily(),
     RSI10Daily(),
