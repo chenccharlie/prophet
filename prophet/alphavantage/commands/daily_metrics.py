@@ -74,12 +74,15 @@ class DailyMetrics(BaseCommand):
             last_recorded_date = lines[-1].split(",")[0]
             start_index = dates.index(last_recorded_date) + 1
 
+        skipped_dates = []
         with open(
           '{}/{}.txt'.format(DailyMetrics.BASE_DIR, symbol),
           'a+',
         ) as file:
           for date in dates[start_index:]:
-            skipped_dates = []
+            if len(date) != 10:
+              skipped_dates.append(date)
+              continue
             try:
               file.write("{},{}\n".format(
                 date,
